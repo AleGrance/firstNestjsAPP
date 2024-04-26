@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req, Res } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { Request, Response } from 'express';
+import { Request, Response, query } from 'express';
 
 @Controller()
 export class TasksController {
@@ -16,7 +16,8 @@ export class TasksController {
     }
 
     @Get('/tasks')
-    getAll() {
+    getAll(@Query() query: any) {
+        console.log(query);
         return this.tasksService.obtenerTareas(); //{ msg: 'Obteniendo todas las tareas...'}
     }
 
