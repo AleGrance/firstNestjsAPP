@@ -1,29 +1,27 @@
-import { Body, Controller, Get, Post, Query, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Req, Res } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Request, Response, query } from 'express';
 
-@Controller()
+@Controller('/tasks')
 export class TasksController {
 
     constructor(private tasksService: TasksService) { }
 
     @Get('/')
-    index(@Req() request: Request, @Res() response: Response) {
-        response.status(200).json({
-            msg: 'Nestjs API...'
-        })
-        //return { msg: 'Nestjs API...'}
-    }
-
-    @Get('/tasks')
     getAll(@Query() query: any) {
-        console.log(query);
+        //console.log(query);
         return this.tasksService.obtenerTareas(); //{ msg: 'Obteniendo todas las tareas...'}
     }
 
-    @Post('/tasks')
+    @Get('/:id')
+    getTask(@Param('id') id: string) {
+        return this.tasksService.obtenerTarea(parseInt(id));
+    }
+
+    @Post('/')
     post(@Body() task: any) {
         this.tasksService.crearTarea(task);
         return task;
     }
+
 }
