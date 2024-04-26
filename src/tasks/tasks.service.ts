@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateTask } from './dto/create-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -18,7 +19,7 @@ export class TasksService {
         return tareaEncontrada
     }
 
-    crearTarea(task: any) {
+    crearTarea(task: CreateTask) {
         this.tasks.push(task);
         console.log('TaskService: ', task);
     }
