@@ -1,22 +1,34 @@
 import { Injectable } from '@nestjs/common';
 
+export interface User {
+    name: string,
+    phone: number,
+    pais: string
+}
+
 @Injectable()
 export class UsersService {
-    obtenerUsuarios() {
-        let users = [
-            {
-                name: 'usuario uno',
-                phone: 595986111222,
-                pais: 'PY',
-            },
+    obtenerUsuarios(): User {
+        return {
+            name: 'usuario uno',
+            phone: 595986111222,
+            pais: 'PY',
+        }
+    }
 
-            {
-                name: 'usuario dos',
-                phone: 595986333444,
-                pais: 'BR',
-            }
-        ];
+    insertarUsuario() {
+        return 'Insertando usuario...'
+    }
 
-        return users;
+    actualizarUsuario() {
+        return 'Actualizando usuario...'
+    }
+
+    actualizarNombreUsuario() {
+        return 'Actualizando nombre de usuario...'
+    }
+
+    eliminarUsuario() {
+        return 'Eliminando usuario...'
     }
 }

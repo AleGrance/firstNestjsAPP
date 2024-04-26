@@ -1,37 +1,40 @@
 import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 
-@Controller({})
+@Controller('/users')
 export class UsersController {
-    constructor(private usersService: UsersService) {}
+    constructor(private usersService: UsersService) { }
 
-    @Get('/users')
+    @Get()
     get() {
         //return {msg: 'API Users...'};
         return this.usersService.obtenerUsuarios();
     }
 
-    @Post('/users')
+    @Post()
     post() {
-        console.log('Post users')
-        return 'Creando users...'
+        console.log('Post users');
+        return this.usersService.insertarUsuario();
     }
 
     // Actualizacion total del objeto. Ej se actualiza {name: 'usuario uno',phone: 595986111222, pais: 'PY'}
-    @Put('/users')
+    @Put()
     put() {
-        return 'Actualizando users...'
+        console.log('Put users');
+        return this.usersService.actualizarUsuario();
     }
 
     // Actualizacion parcial del objeto. Ej se actualiza solo {name: 'usuario uno'} o solo {phone: 595986111222}
-    @Patch('/users')
+    @Patch()
     patch() {
-        return 'Actualizando parcialmente users...'
+        console.log('Patch users');
+        return this.usersService.actualizarNombreUsuario();
     }
 
-    @Delete('/users')
+    @Delete()
     delete() {
-        return 'Eliminando users...'
+        console.log('Delete users');
+        return this.usersService.eliminarUsuario();
     }
 
 
