@@ -4,11 +4,7 @@ import { TasksService } from './tasks.service';
 @Controller({})
 export class TasksController {
 
-    taskServ: TasksService;
-
-    constructor(tasksService: TasksService) {
-        this.taskServ = tasksService;
-    }
+    constructor(private tasksService: TasksService) {}
 
     @Get('/')
     index() {
@@ -17,6 +13,6 @@ export class TasksController {
 
     @Get('/tasks')
     getAll() {
-        return this.taskServ.obtenerTareas(); //{ msg: 'Obteniendo todas las tareas...'}
+        return this.tasksService.obtenerTareas(); //{ msg: 'Obteniendo todas las tareas...'}
     }
 }
