@@ -1,5 +1,6 @@
-import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { CreateUser } from './dto/create-user.dto';
 
 @Controller('/users')
 export class UsersController {
@@ -12,9 +13,9 @@ export class UsersController {
     }
 
     @Post()
-    post() {
-        console.log('Post users');
-        return this.usersService.insertarUsuario();
+    post(@Body() user: CreateUser) {
+        console.log('Post users', user);
+        return this.usersService.insertarUsuario(user);
     }
 
     // Actualizacion total del objeto. Ej se actualiza {name: 'usuario uno',phone: 595986111222, pais: 'PY'}

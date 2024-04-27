@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreateUser } from './dto/create-user.dto';
 
 export interface User {
     name: string,
@@ -16,8 +17,8 @@ export class UsersService {
         }
     }
 
-    insertarUsuario() {
-        return 'Insertando usuario...'
+    insertarUsuario(user: CreateUser) {
+        return user;
     }
 
     actualizarUsuario() {
