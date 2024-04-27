@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Patch, Post, Put} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Patch, Post, Put} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUser } from './dto/create-user.dto';
 
@@ -13,6 +13,7 @@ export class UsersController {
     }
 
     @Post()
+    @HttpCode(201)
     post(@Body() user: CreateUser) {
         console.log('Post users', user);
         return this.usersService.insertarUsuario(user);
@@ -32,7 +33,8 @@ export class UsersController {
         return this.usersService.actualizarNombreUsuario();
     }
 
-    @Delete()
+    @Delete('/delete')
+    @HttpCode(500)
     delete() {
         console.log('Delete users');
         return this.usersService.eliminarUsuario();
