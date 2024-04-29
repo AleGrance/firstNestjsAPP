@@ -1,13 +1,15 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Patch, Post, Put, Query} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Patch, Post, Put, Query, UseGuards} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUser } from './dto/create-user.dto';
 import { ValidateUserPipe } from './pipes/validate-user/validate-user.pipe';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 @Controller('/users')
 export class UsersController {
     constructor(private usersService: UsersService) { }
 
     @Get()
+    @UseGuards(AuthGuard)
     get() {
         //return {msg: 'API Users...'};
         return this.usersService.obtenerUsuarios();
