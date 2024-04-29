@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, HttpCode, Patch, Post, Put} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Patch, Post, Put, Query} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUser } from './dto/create-user.dto';
+import { ValidateUserPipe } from './pipes/validate-user/validate-user.pipe';
 
 @Controller('/users')
 export class UsersController {
@@ -38,6 +39,16 @@ export class UsersController {
     delete() {
         console.log('Delete users');
         return this.usersService.eliminarUsuario();
+    }
+
+    @Get('/tasksByUser/:num')
+    getTasksByUser(@Param('num', ParseIntPipe) num: number) {
+        return num + 8;
+    }
+
+    @Get('validate')
+    validar(@Query(ValidateUserPipe) query: any) {
+        console.log(query);
     }
 
 
