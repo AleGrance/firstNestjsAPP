@@ -6,12 +6,13 @@ export class CreateUser {
     @MinLength(4)
     name: string
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    phone: number
+    @MinLength(4)
+    email: string
     
     @IsString()
     @IsNotEmpty()
     @MinLength(2)
-    pais: string
+    password: string
 }
