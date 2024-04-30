@@ -1,14 +1,17 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Patch, Post, Put, Query, UseGuards} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Patch, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUser } from './dto/create-user.dto';
 import { ValidateUserPipe } from './pipes/validate-user/validate-user.pipe';
 import { AuthGuard } from './guards/auth/auth.guard';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('/users')
+@ApiTags('users')
 export class UsersController {
     constructor(private usersService: UsersService) { }
 
     @Get()
+    @ApiOperation({ summary: 'Obtener todos los usuarios' })
     @UseGuards(AuthGuard)
     get() {
         //return {msg: 'API Users...'};
@@ -16,6 +19,7 @@ export class UsersController {
     }
 
     @Post()
+    @ApiOperation({ summary: 'Insertar nuevo usuario' })
     @HttpCode(201)
     post(@Body() user: CreateUser) {
         console.log('Post users', user);
@@ -37,6 +41,7 @@ export class UsersController {
     }
 
     @Delete('/delete')
+    @ApiOperation({ summary: 'Eliminar un usuario' })
     @HttpCode(500)
     delete() {
         console.log('Delete users');
