@@ -7,6 +7,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(helmet());
+
+  // Usar las validaciones para todos los modulos del proyecto
+  // whitelist para evitar que se agreguen campos que no se estan esperando
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true
   }));
